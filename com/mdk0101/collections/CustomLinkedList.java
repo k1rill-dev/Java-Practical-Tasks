@@ -18,6 +18,42 @@ public class CustomLinkedList<Type> implements Iterable<Type>{
         }
         _size++;
     }
+
+    public void add(int index, Type element){
+      if(index == 0){
+        pushBack(element);
+      }else{
+        Node<Type> node = _first;
+        for(int i = 0; i < index - 1; i++){
+          node = node.getNext();
+        }
+        Node<Type> node2 = new Node<>(node, node.getNext(), element);
+        node.setNext(node2);
+        _size++;
+      }
+    }
+
+    public void deleteFront(){
+      if(_first == null){
+        return;
+      }
+      _first = _first.getNext();
+      _size--;
+    }
+
+    public void deleteBack(){
+      if(_first == null){
+        return;
+      }
+      Node<Type> iterator = _first;
+      while(iterator.getNext() != _last){
+        iterator = iterator.getNext();
+      }
+      iterator.setNext(null);
+      _last = iterator;
+      _size--;
+    }
+  
     public void pushUp(Type element){
         if(_first == null) {
             _first = new Node<Type>(null, null, element);
